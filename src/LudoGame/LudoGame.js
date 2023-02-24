@@ -44,14 +44,14 @@ const LudoGame = () => {
   const [playerTwo, setPlayerTwo] = useState(0);
   const [playerOneScore, setPlayerOneScore] = useState(0);
   const [playerTwoScore, setPlayerTwoScore] = useState(0);
-  const [isplayerOne, setIsPlayerOne] = useState(true);
+  const [isPlayerOne, setIsPlayerOne] = useState(true);
   const [isGameOver, setIsGameOver] = useState(false);
 
   const changeImage = () => {
     const randomNumber = Math.floor(Math.random() * images.length);
     setDiceNumber(randomNumber);
     if (!isGameOver) {
-      if (isplayerOne) {
+      if (isPlayerOne) {
         const playerOneTotal =
           ((playerOneScore + randomNumber + 1) / totalNumber) * 100;
         if (playerOneTotal >= 100) {
@@ -59,7 +59,7 @@ const LudoGame = () => {
         }
         setPlayerOne(playerOneTotal);
         setPlayerOneScore(playerOneScore + randomNumber + 1);
-        setIsPlayerOne(!isplayerOne);
+        setIsPlayerOne(!isPlayerOne);
       } else {
         const playerTwoTotal =
           ((playerTwoScore + randomNumber + 1) / totalNumber) * 100;
@@ -68,7 +68,7 @@ const LudoGame = () => {
         }
         setPlayerTwoScore(playerTwoScore + randomNumber + 1);
         setPlayerTwo(playerTwoTotal);
-        setIsPlayerOne(!isplayerOne);
+        setIsPlayerOne(!isPlayerOne);
       }
     }
   };
