@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./LudoGame.css";
 import player1 from "../Image/Player1.jpg";
 import player2 from "../Image/player2.jpg";
@@ -16,45 +16,62 @@ const images = [dice1, dice2, dice3, dice4, dice5, dice6];
 const LudoGame = () => {
   let iconStyles = {
     fontSize: "1.5em",
-    left: "0%",
+    left: "-5%",
     position: "absolute",
     top: "10%",
   };
   let iconStyles1 = {
     fontSize: "1.5em",
-    right: "0%",
+    right: "-5%",
     position: "absolute",
     top: "10%",
   };
   let iconStyles2 = {
     fontSize: "1.5em",
-    left: "0%",
+    left: "-5%",
     top: "30%",
     position: "absolute",
   };
   let iconStylesFlag = {
     fontSize: "1.5em",
-    right: "0%",
+    right: "-5%",
     top: "30%",
     position: "absolute",
   };
-  const [diceNumber, setDiceNumber] = useState(
-    Math.floor(Math.random() * 6) + 1
-  );
+  const totalNumber = 60;
+  const [diceNumber, setDiceNumber] = useState(0);
+  const [playerOne, setPlayerOne] = useState(0);
+  const [playerTwo, setPlayerTwo] = useState(0);
+  const [playerOneScore, setPlayerOneScore] = useState(0);
+  const [playerTwoScore, setPlayerTwoScore] = useState(0);
+  const [isplayerOne, setIsPlayerOne] = useState(true);
+  const [isGameOver, setIsGameOver] = useState(false);
 
   const changeImage = () => {
     const randomNumber = Math.floor(Math.random() * images.length);
     setDiceNumber(randomNumber);
+    if (!isGameOver) {
+      if (isplayerOne) {
+        const playerOneTotal =
+          ((playerOneScore + randomNumber + 1) / totalNumber) * 100;
+        if (playerOneTotal >= 100) {
+          setIsGameOver(true);
+        }
+        setPlayerOne(playerOneTotal);
+        setPlayerOneScore(playerOneScore + randomNumber + 1);
+        setIsPlayerOne(!isplayerOne);
+      } else {
+        const playerTwoTotal =
+          ((playerTwoScore + randomNumber + 1) / totalNumber) * 100;
+        if (playerTwoTotal >= 100) {
+          setIsGameOver(true);
+        }
+        setPlayerTwoScore(playerTwoScore + randomNumber + 1);
+        setPlayerTwo(playerTwoTotal);
+        setIsPlayerOne(!isplayerOne);
+      }
+    }
   };
-
-  useEffect(() => changeImage(), []);
-
-  // function dice() {
-  // const dice = Math.floor(Math.random() * 6) + 1;
-  // const play1dice = `image/dice${dice}.png`;
-  //console.log(play1dice);
-  //document.getElementById("check").setAttribute("src", play1dice);
-  //}
 
   return (
     <div>
@@ -66,7 +83,7 @@ const LudoGame = () => {
           <div
             style={{
               position: "absolute",
-              left: `${diceNumber * 10}px`,
+              left: `${playerOne}%`,
               top: "4%",
             }}
           >
@@ -79,9 +96,21 @@ const LudoGame = () => {
         <hr color="black" width="100%" />
       </div>
       <div className="player2">
-        <div className="image1">
-          <MdLocationOn style={iconStyles2} /> <img src={player2} alt="" />
-          <BsFlagFill style={iconStylesFlag} />
+        <div>
+          <div>
+            <MdLocationOn style={iconStyles2} />
+          </div>
+          <div
+            style={{
+              position: "absolute",
+              left: `${playerTwo}% `,
+            }}
+          >
+            <img src={player2} alt="" />
+          </div>
+          <div>
+            <BsFlagFill style={iconStylesFlag} />
+          </div>
         </div>
         <hr color="black" width="100%" />
       </div>
@@ -94,7 +123,7 @@ const LudoGame = () => {
           <img src={player1} alt="player1" />
         </div>
         <div className="text">
-          <p>Aman Singh</p>
+          <p>Aman Singh : {playerOneScore}</p>
         </div>
         <div>
           <img
@@ -105,7 +134,7 @@ const LudoGame = () => {
           />
         </div>
         <div className="text">
-          <p>Ansi Singh</p>
+          <p>Ansi Singh : {playerTwoScore}</p>
         </div>
         <div>
           <img src={player2} alt="" />
