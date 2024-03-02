@@ -1,3 +1,3 @@
  * Project Name : Ludo Race Game
 
-* Live Link :  https://scintillating-sunburst-c4f501.netlify.app/
+* Live Link :  https://sunny-conkies-850241.netlify.app/

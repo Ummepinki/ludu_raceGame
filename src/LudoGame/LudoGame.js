@@ -53,8 +53,8 @@ const LudoGame = () => {
     if (!isGameOver) {
       if (isPlayerOne) {
         const playerOneTotal =
-          ((playerOneScore + randomNumber + 1) / totalNumber) * 100;
-        if (playerOneTotal >= 100) {
+          ((playerOneScore + randomNumber + 1) / totalNumber) * 90;
+        if (playerOneTotal >= 90) {
           setIsGameOver(true);
         }
         setPlayerOne(playerOneTotal);
@@ -62,8 +62,8 @@ const LudoGame = () => {
         setIsPlayerOne(!isPlayerOne);
       } else {
         const playerTwoTotal =
-          ((playerTwoScore + randomNumber + 1) / totalNumber) * 100;
-        if (playerTwoTotal >= 100) {
+          ((playerTwoScore + randomNumber + 1) / totalNumber) * 90;
+        if (playerTwoTotal >= 90) {
           setIsGameOver(true);
         }
         setPlayerTwoScore(playerTwoScore + randomNumber + 1);
